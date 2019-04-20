@@ -23,7 +23,7 @@ export default {
 }
 
 .feedImage {
-
+  border-radius: 8px;
   height: 560px;
   width: 375px;
 }
