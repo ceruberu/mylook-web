@@ -7,12 +7,14 @@
       <router-link class="navButton" to="/magazine">매거진</router-link>
       <router-link class="navButton" to="/upload">업로드</router-link>
       <div class="navButton loginButton" @click="openModal('login')"> 로그인</div>
+      <div class="navButton signupButton" @click="openModal('signup')"> 회원가입</div>
     </div>
     <router-view class="view"/>
     <transition name="fade">
       <div class="modalManager" v-if="showModal" @click="closeModal">
         <div class="modal" @click.stop>
           <Login v-if="currentModal == 'login'" />
+          <Signup v-if="currentModal == 'signup'" />
         </div>
       </div>
     </transition>
@@ -21,6 +23,7 @@
 
 <script>
 import Login from '@/views/Login.vue';
+import Signup from '@/views/Signup.vue';
 
 export default {
   data() {
@@ -40,7 +43,8 @@ export default {
     }
   },
   components: {
-    Login
+    Login,
+    Signup
   } 
 }
 </script>
