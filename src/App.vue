@@ -6,8 +6,13 @@
       <router-link class="navButton" to="/feed">팔로잉</router-link>
       <router-link class="navButton" to="/magazine">매거진</router-link>
       <router-link class="navButton" to="/upload">업로드</router-link>
-      <div class="navButton loginButton" @click="openModal('login')"> 로그인</div>
-      <div class="navButton signupButton" @click="openModal('signup')"> 회원가입</div>
+      <template v-if="user.loggedIn === false">
+        <div v-if="user.loggedIn === false" class="navButton loginButton" @click="openModal('login')"> 로그인</div>
+        <div v-if="user.loggedIn === false" class="navButton signupButton" @click="openModal('signup')"> 회원가입</div>
+      </template>
+      <template v-else>
+        {{user.userid}}
+      </template>
     </div>
     <router-view class="view"/>
     <transition name="fade">
@@ -31,6 +36,16 @@ export default {
       showModal: false,
       currentModal: ''
      }
+  },
+  computed: {
+    user () {
+      return this.$store.state.user
+    }
+  },
+  created() {
+    // FETCH USER DATE AFTER FIRST RENDER
+    console.log(this);
+    this.$store.dispatch('user/login');
   },
   methods: {
     openModal(modal) {
