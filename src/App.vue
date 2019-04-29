@@ -7,26 +7,24 @@
       <router-link class="navButton" to="/magazine">매거진</router-link>
       <router-link class="navButton" to="/upload">업로드</router-link>
       <template v-if="user.loggedIn === false">
-        <div v-if="user.loggedIn === false" class="navButton loginButton" @click="openModal('login')"> 로그인</div>
-        <div v-if="user.loggedIn === false" class="navButton signupButton" @click="openModal('signup')"> 회원가입</div>
+        <div class="navButton loginButton" @click="openModal('Login')"> 로그인</div>
+        <div class="navButton signupButton" @click="openModal('Signup')"> 회원가입</div>
       </template>
       <template v-else>
-        {{user.userid}}
+        <div class="profile">
+          {{user.currentUser.username}}
+        </div>
       </template>
     </div>
     <router-view class="view"/>
     <transition name="fade">
-      <div class="modalManager" v-if="showModal" @click="closeModal">
-        <div class="modal" @click.stop>
-          <Login v-if="currentModal == 'login'" />
-          <Signup v-if="currentModal == 'signup'" />
-        </div>
-      </div>
+      <modal v-if="showModal" :modalType="modalType" @closeModal="closeModal"/>
     </transition>
   </div>
 </template>
 
 <script>
+import Modal from '@/views/Modal.vue';
 import Login from '@/views/Login.vue';
 import Signup from '@/views/Signup.vue';
 
@@ -34,7 +32,7 @@ export default {
   data() {
     return { 
       showModal: false,
-      currentModal: ''
+      modalType: ''
      }
   },
   computed: {
@@ -49,17 +47,18 @@ export default {
   },
   methods: {
     openModal(modal) {
-      this.currentModal = modal;
+      this.modalType = modal;
       return this.showModal = true;
     },
     closeModal() {
-      this.currentModal = '';
+      this.modalType = '';
       return this.showModal = false;
     }
   },
   components: {
     Login,
-    Signup
+    Signup,
+    Modal
   } 
 }
 </script>
@@ -94,42 +93,24 @@ a {
   text-decoration: none;
 }
 
-.modalManager {
-  display: flex;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: rgba(0,0,0,0.68);
-  justify-content: center;
-  align-items: center;
-}
-
-.modal {
-  position:relative;
-  width: 440px;
-  min-height: 550px;
-  background-color: white;
-  margin: 10px;
-  border-radius: 8px;
-  padding: 36px 44px;
-}
-
-.modalBody {
-  position: relative;
-  height: 100%;
-}
-
 .router-link-exact-active {
   font-weight: bold;
 }
 
+.navLogo {
+  min-width: 50px;
+}
+
 .navButton {
+  min-width: 50px;
   margin-left: 30px;
 }
 
 .loginButton {
+  margin-left: auto;
+}
+
+.profile {
   margin-left: auto;
 }
 

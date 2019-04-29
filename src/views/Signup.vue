@@ -1,5 +1,5 @@
 <template>
-  <div class="signupModal">
+  <div>
     <h1>Signup</h1>
     <div>페이스북 로그인</div>
     <div>네이버 로그인</div>

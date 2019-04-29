@@ -7,9 +7,6 @@ const state = {
 };
 
 const getters = {
-  userStatus: state => {
-    return state.user
-  }
 }
 
 const actions = {
@@ -18,7 +15,8 @@ const actions = {
     context.commit(LOGIN_REQUEST);
 
     try {
-      const currentUser = await this.$http.post('/api/users/me');
+      const meResponse = await this.$http.post('/api/users/me');
+      const currentUser = meResponse.data;
       context.commit(LOGIN_SUCCESS, currentUser);
     } catch(err) {
       context.commit(LOGIN_FAIL);
