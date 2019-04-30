@@ -1,14 +1,14 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link class="navLogo" to="/">마이룩</router-link>
-      <router-link class="navButton" to="/">탐색</router-link>
-      <router-link class="navButton" to="/feed">팔로잉</router-link>
-      <router-link class="navButton" to="/magazine">매거진</router-link>
-      <router-link class="navButton" to="/upload">업로드</router-link>
+      <router-link class="ิbutton navLogo" to="/">마이룩</router-link>
+      <router-link class="button navButton" to="/">탐색</router-link>
+      <router-link class="button navButton" to="/feed">팔로잉</router-link>
+      <router-link class="button navButton" to="/magazine">매거진</router-link>
+      <div class="button uploadButton" @click="openModal('Upload')"> 사진 올리기 </div>
       <template v-if="user.loggedIn === false">
-        <div class="navButton loginButton" @click="openModal('Login')"> 로그인</div>
-        <div class="navButton signupButton" @click="openModal('Signup')"> 회원가입</div>
+        <div class="button navButton loginButton" @click="openModal('Login')"> 로그인</div>
+        <div class="button navButton signupButton" @click="openModal('Signup')"> 회원가입</div>
       </template>
       <template v-else>
         <div class="profile">
@@ -86,6 +86,7 @@ body {
   height: 44px;
   padding: 0px 20px;
   border-bottom: 1px solid lightgrey;
+  font-size: 14px;
 }
 
 a {
@@ -101,17 +102,30 @@ a {
   min-width: 50px;
 }
 
+.button {
+  cursor: pointer;
+}
+
 .navButton {
   min-width: 50px;
   margin-left: 30px;
 }
 
-.loginButton {
+.uploadButton {
+  display: flex;
+  border: 1px solid #ddd;
   margin-left: auto;
+  padding: 0px 11px;
+  height: 32px;
+  line-height: 30px;
+  box-shadow: 0 1px 1px rgba(0,0,0,.04);
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
 }
 
 .profile {
-  margin-left: auto;
+  margin-left: 30px;
 }
 
 .view {
