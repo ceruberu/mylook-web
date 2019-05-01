@@ -1,6 +1,7 @@
 <template>
   <div class="modalManager" @click.self="$emit('closeModal')">
       <div class="modal" v-bind:is="modalType"/>
+      <div class="closeButton"> X </div>
   </div>
 </template>
 
@@ -33,6 +34,7 @@ export default {
   justify-content: center;
   align-items: center;
   padding: 20px 70px;
+  cursor: zoom-out;
 }
 
 .modal {
@@ -44,5 +46,17 @@ export default {
   margin: 10px;
   border-radius: 8px;
   box-shadow: 0 4px 16px rgba(0,0,0,.12), 0 0 4px rgba(0,0,0,.12);
+  cursor: default;
+}
+
+.closeButton {
+  position: fixed;
+  left: 14px;
+  top: 14px;
+  width: 18px;
+  height: 18px;
+  color: white;
+  font-size: bold;
+  cursor: zoom-out;
 }
 </style>
